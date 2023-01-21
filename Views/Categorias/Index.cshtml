@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Aplicacion_MVC.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Categorias";
+}
+
+<h1>Categorias</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Identificador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaRegistro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+        }
+        @foreach (var item in Model)
+        {
+            String rowColor = "";
+
+            if (i % 3 == 0) { rowColor = "table-success"; }
+            if (i % 3 == 1) { rowColor = "table-warning"; }
+            if (i % 3 == 2) { rowColor = "table-info"; }
+
+            <tr class="text-dark @rowColor">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Identificador)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaRegistro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    <a class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.IdCategoria"><i class="fas fa-pen"></i> Edit</a> |
+                    <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.IdCategoria"><i class="fas fa-info"></i> Details</a> |
+                    <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@item.IdCategoria"><i class="fas fa-trash"></i> Delete</a>
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
